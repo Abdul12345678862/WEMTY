@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Mubarak</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f5f5f5;
+    overflow:hidden;
+}
+
+/* ENVELOPE */
+.envelope-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:10;
+}
+
+.envelope{
+    width:220px;
+    position:relative;
+    cursor:pointer;
+}
+
+.envelope img{
+    width:100%;
+}
+
+.envelope-text{
+    position:absolute;
+    top:40%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    font-weight:300;
+    color:#2c5364;
+    font-size:15px;
+}
+
+/* FIRST CARD */
+.bg-image{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:95%;
+    max-width:360px;
+    aspect-ratio:4/5;
+    background:url('bgimg.jpeg') no-repeat center;
+    background-size:cover;
+    border-radius:20px;
+    opacity:0;
+    transition:0.8s ease;
+}
+
+/* FIRST MESSAGE */
+.message-container{
+    position:absolute;
+    bottom:90px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    text-align:center;
+}
+
+.message{
+    font-size:16px;
+    color:#000;
+    opacity:0;
+    transition:0.6s ease;
+    line-height:1.5;
+}
+
+/* BUTTON */
+.btn{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:16px 40px;
+    border:none;
+    border-radius:40px;
+    background:#00ff66;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    display:none;
+    box-shadow:0 8px 20px rgba(0,0,0,0.35);
+}
+
+/* SECOND IMAGE */
+.second-image{
+    position:absolute;
+    top:50%;
+    left:100%;
+    transform:translateY(-50%);
+    width:95%;
+    max-width:360px;
+    aspect-ratio:4/5;
+    background:url('Transaction.jpeg') no-repeat center;
+    background-size:cover;
+    border-radius:20px;
+    transition:0.8s ease;
+}
+
+/* NEXT MESSAGE */
+.next-message{
+    position:absolute;
+    top:20px;
+    width:100%;
+    text-align:center;
+    font-size:18px;
+    font-weight:700;
+    color:#00ff66;
+    opacity:0;
+    transition:0.6s ease;
+}
+
+@media(max-width:480px){
+    .message{
+        font-size:14px;
+    }
+    .btn{
+        font-size:15px;
+        padding:14px 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENVELOPE -->
+<div class="envelope-container" id="envelopeSection">
+    <div class="envelope" id="envelopeBtn">
+        <img src="icon.png" alt="Envelope">
+        <div class="envelope-text">
+            🌙 Eid Mubarak<br>
+            Touch to open
+        </div>
+    </div>
+</div>
+
+<!-- FIRST CARD -->
+<div class="bg-image" id="bgImage"></div>
+
+<!-- FIRST MESSAGE -->
+<div class="message-container">
+    <div class="message" id="message">
+        🌙 Eid Mubarak! <br>
+        May Allah bless you with happiness and success.
+    </div>
+</div>
+
+<!-- BUTTON -->
+<button class="btn" id="goBtn">Now Let’s Go →</button>
+
+<!-- SECOND IMAGE + NEXT MESSAGE -->
+<div class="second-image" id="secondImage">
+    <div class="next-message" id="nextMessage">
+        🥳 Yeh Lo Tumhari Eidi 🤗 <br>
+        ✨ Stay Blessed & Enjoy Your Eid ✨
+    </div>
+</div>
+
+<!-- AUDIO FILE -->
+<audio id="eidAudio" src="eid.mp3"></audio>
+
+<script>
+const envelopeBtn = document.getElementById("envelopeBtn");
+const envelopeSection = document.getElementById("envelopeSection");
+const bgImage = document.getElementById("bgImage");
+const message = document.getElementById("message");
+const goBtn = document.getElementById("goBtn");
+const secondImage = document.getElementById("secondImage");
+const nextMessage = document.getElementById("nextMessage");
+const eidAudio = document.getElementById("eidAudio");
+
+/* OPEN ENVELOPE */
+envelopeBtn.addEventListener("click", () => {
+
+    // Play Audio
+    eidAudio.play().catch(error => {
+        console.log("Audio play failed:", error);
+    });
+
+    envelopeSection.style.display = "none";
+    bgImage.style.opacity = "1";
+
+    setTimeout(() => message.style.opacity = "1", 500);
+    setTimeout(() => goBtn.style.display = "block", 1000);
+});
+
+/* LETS GO CLICK */
+goBtn.addEventListener("click", () => {
+
+    message.style.opacity = "0";
+    goBtn.style.display = "none";
+
+    secondImage.style.left = "50%";
+    secondImage.style.transform = "translate(-50%,-50%)";
+
+    setTimeout(() => {
+        nextMessage.style.opacity = "1";
+    }, 600);
+});
+</script>
+
+</body>
+</html>
